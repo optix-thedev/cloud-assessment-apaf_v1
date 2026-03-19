@@ -255,6 +255,14 @@ export default function App() {
 
   useEffect(()=>{if(cRef.current)cRef.current.scrollTop=0;},[cPillar,phase]);
 
+  // Set page title and favicon
+  useEffect(()=>{
+    document.title="Apeiron Sumus | Cloud Adoption Assessment";
+    let link=document.querySelector("link[rel~='icon']");
+    if(!link){link=document.createElement('link');link.rel='icon';document.head.appendChild(link);}
+    link.href='https://static.wixstatic.com/media/95abde_9f0598c93c94433c9ae0f8e6f7121e2d~mv2.png/v1/fill/w_32,h_32,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Logo%20home%20Apeiron.png';
+  },[]);
+
   const css = `
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
     *{margin:0;padding:0;box-sizing:border-box}
@@ -295,10 +303,6 @@ export default function App() {
             {cfg.logo ? <img src={cfg.logo} alt={cfg.companyName} style={{height:30}} /> : <span style={{fontSize:"18px",fontWeight:800,color:B.text}}>{cfg.companyName}</span>}
           </div>
           <div style={{display:"flex",alignItems:"center",gap:16}}>
-            {/* White-label toggle */}
-            <button onClick={()=>setBrandKey(k=>k==="apeiron"?"whitelabel":"apeiron")} style={{padding:"6px 12px",borderRadius:6,border:`1px solid ${B.border}`,background:"transparent",color:B.textDim,fontSize:"10px",fontFamily:"'JetBrains Mono',monospace",cursor:"pointer"}} title="Toggle white-label mode">
-              {brandKey==="apeiron"?"⚙ White-label":"◆ Apeiron"}
-            </button>
             <button onClick={()=>{setPage("assess");setPhase("assess");}} style={{...btnP(false),padding:"10px 24px",fontSize:"13px"}}>
               Start Free Assessment
             </button>
